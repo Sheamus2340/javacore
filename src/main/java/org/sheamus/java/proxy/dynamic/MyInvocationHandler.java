@@ -2,6 +2,7 @@ package org.sheamus.java.proxy.dynamic;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * Created by Sheamus on 2018/7/11.
@@ -12,6 +13,11 @@ public class MyInvocationHandler implements InvocationHandler {
 
     public MyInvocationHandler(Object target) {
         this.target = target;
+    }
+
+    public <T> T getProxy() {
+        return (T) Proxy.newProxyInstance(target.getClass().getClassLoader(),
+                target.getClass().getInterfaces(),this);
     }
 
     /**
